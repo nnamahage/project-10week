@@ -32,7 +32,7 @@ public class TeacherManagement {
         }
     }
 
-    public void removeTeacher id) {
+    public void removeTeacher int id) {
         try {
             stmt = c.createStatement();
             String sql = "DELETE * FROM students WHERE id = " + id;
