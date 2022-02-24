@@ -2,13 +2,11 @@ package com.company;
 
 import java.sql.*;
 
-public class TeacherManagement extends DB{
-
+public class GradeBook extends DB{
     ResultSet rs = null;
     PreparedStatement ps = null;
     Connection c = null;
     Statement stmt = null;
-
 
     @Override
     public void connect() {
@@ -23,11 +21,10 @@ public class TeacherManagement extends DB{
     }
 
     @Override
-    public void remove(int id) {
-        //remove teacher by id
+    public void remove(int teacher_id) {
         try {
             stmt = c.createStatement();
-            String sql = "DELETE * FROM teachers WHERE teacher_id = " + id;
+            String sql = "DELETE * FROM grade_book WHERE teacher_id = " + teacher_id;
             stmt.executeUpdate(sql);
             stmt.close();
             c.close();
@@ -39,34 +36,31 @@ public class TeacherManagement extends DB{
 
     @Override
     public void showTable() {
-        //show the whole table
         try {
-            String sql = "SELECT * FROM teachers";
+            String sql = "SELECT * FROM grade_book";
             ps = c.prepareStatement(sql);
             rs = ps.executeQuery();
 
-            while (rs.next()) {
-                int id = rs.getInt("teacher_id");
-                String name = rs.getString("teacher_name");
-                String surname = rs.getString("teacher_surname");
-                String subject = rs.getString("subject");
 
-                System.out.println("id: " + id + ", name: ," + name
-                        + ", surname: " + surname + ", subject: " + subject);
+            while (rs.next()) {
+
+                String teacher_id = rs.getString("teacher_id");
+                String stud_id = rs.getString("stud_id");
+                String grades = rs.getString("grades");
+
+                System.out.println("teacher_id: " + teacher_id + ", stud_id: " + stud_id +", grades" + grades);
             }
-        }
-        catch(Exception e){
+
+        } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
     }
 
-    public void addTeacher(int id, String name, String surname, String subject) {
-        //add new teacher
+    public void addGrades(int teach_id, int stud_id, String grades) {
         try {
             stmt = c.createStatement();
-            String sql = "INSERT INTO teachers VALUES(" + id + ", '"+ name +
-                    "', '" + surname + "', '" + subject + "')";
+            String sql = "INSERT INTO grade_book VALUES(" + teach_id + ", " + stud_id + ", '" + grades + "')";
             stmt.executeUpdate(sql);
             stmt.close();
             c.close();
@@ -75,4 +69,5 @@ public class TeacherManagement extends DB{
             System.exit(0);
         }
     }
+
 }
