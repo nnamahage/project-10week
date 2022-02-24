@@ -2,7 +2,7 @@ package com.company;
 
 import java.sql.*;
 
-public class GradeBook extends DB{
+public class GradeBook extends DB {
     ResultSet rs = null;
     PreparedStatement ps = null;
     Connection c = null;
@@ -15,7 +15,7 @@ public class GradeBook extends DB{
             c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/project", "postgres", "12345");
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.println(e.getClass().getName()+": " + e.getMessage());
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
     }
@@ -29,7 +29,7 @@ public class GradeBook extends DB{
             stmt.close();
             c.close();
         } catch (Exception e) {
-            System.err.println(e.getClass().getName()+": "+ e.getMessage());
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
     }
@@ -48,7 +48,7 @@ public class GradeBook extends DB{
                 String stud_id = rs.getString("stud_id");
                 String grades = rs.getString("grades");
 
-                System.out.println("teacher_id: " + teacher_id + ", stud_id: " + stud_id +", grades" + grades);
+                System.out.println("teacher_id: " + teacher_id + ", stud_id: " + stud_id + ", grades" + grades);
             }
 
         } catch (Exception e) {
@@ -65,9 +65,9 @@ public class GradeBook extends DB{
             stmt.close();
             c.close();
         } catch (Exception e) {
-            System.err.println(e.getClass().getName()+": "+ e.getMessage());
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
     }
-
 }
+
